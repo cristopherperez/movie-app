@@ -1,10 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useUserStore } from "./stores/user";
 
-import Home from "./views/Home.vue";
-import Login from "./views/Login.vue";
-import Register from "./views/Register.vue";
-
 const requireAuth = async (to, from, next) => {
   const userStore = useUserStore();
   userStore.loadingSession = true;
@@ -12,15 +8,39 @@ const requireAuth = async (to, from, next) => {
   if (user) {
     next();
   } else {
-    next("/login");
+    next("/register");
   }
   userStore.loadingSession = false;
 };
 
 const routes = [
-  { path: "/", component: Home, beforeEnter: requireAuth },
-  { path: "/login", component: Login },
-  { path: "/register", component: Register },
+  {
+    path: "/",
+    beforeEnter: requireAuth,
+    component: () => import("./layouts/DefaultLayout.vue"),
+    meta: { title: "Inicio" },
+    children: [
+      {
+        path: "",
+        name: "home",
+        component: () => import("./views/HomeView.vue"),
+        meta: { title: "home" },
+      },
+      {
+        path: "/movies",
+        name: "movies",
+        component: () => import("./views/MoviesView.vue"),
+        meta: { title: "movies" },
+      },
+      {
+        path: "/movies/:name",
+        name: "movie",
+        component: () => import("./views/MovieView.vue"),
+        meta: { title: "movie" },
+      },
+    ],
+  },
+  { path: "/register", component: () => import("./views/RegisterView.vue") },
 ];
 
 const router = createRouter({
