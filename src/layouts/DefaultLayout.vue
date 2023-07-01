@@ -10,53 +10,30 @@ const rail = ref(true);
 </script>
 <template>
   <v-layout>
-    <v-navigation-drawer
-      style="height: 100vh"
-      class="position-fixed"
-      rail-width="78"
-      v-model="drawer"
-      :rail="rail"
-      permanent
-      @click="rail = false"
-    >
-      <v-list-item title="John Leider" nav>
-        <template v-slot:append>
-          <v-btn
-            variant="text"
-            icon="mdi-chevron-left"
-            @click.stop="rail = !rail"
-          ></v-btn>
-        </template>
-      </v-list-item>
-      <v-divider></v-divider>
-      <v-list density="compact" nav>
-        <RouterLink to="/">
-          <v-list-item
-            prepend-icon="mdi-home-city"
-            title="Home"
-            value="home"
-          ></v-list-item>
-        </RouterLink>
-        <RouterLink to="/movies">
-          <v-list-item
-          prepend-icon="mdi-account"
-          title="My Account"
-          value="account"
-          ></v-list-item>
-        </RouterLink>
-      </v-list>
-      <template v-slot:append>
-        <div class="pa-2">
-          <v-btn v-if="userStore.userData" @click="userStore.logoutUser" block>
-            Logout
-          </v-btn>
-        </div>
-      </template>
-    </v-navigation-drawer>
-    <v-main>
+    <v-app-bar color="black" prominent>
+      <RouterLink to="/">
+        <v-btn variant="text" color="white" icon="mdi-home"></v-btn>
+      </RouterLink>
+      <RouterLink to="/movies">
+        <v-btn variant="text" color="white" icon="mdi-magnify"></v-btn>
+      </RouterLink>
+      <v-spacer></v-spacer>
+      <v-btn
+        color="white"
+        class="font-weight-bold text-capitalize"
+        @click="userStore.logoutUser"
+      >
+        Logout
+      </v-btn>
+    </v-app-bar>
+    <v-main class="bg-login">
       <RouterView />
     </v-main>
   </v-layout>
 </template>
 
-<style scoped></style>
+<style scoped>
+.bg-login {
+  background-color: black;
+}
+</style>
