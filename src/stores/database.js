@@ -18,5 +18,17 @@ export const useDatabaseStore = defineStore("database", {
       } finally {
       }
     },
+    async fetchMovieDetails(title) {
+      try {
+        const encodedTitle = encodeURIComponent(title);
+        const { data } = await axios.get(
+          `http://www.omdbapi.com/?i=tt3896198&apikey=9ff345ba&t=${encodedTitle}`
+        );
+        console.log(data);
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 });
