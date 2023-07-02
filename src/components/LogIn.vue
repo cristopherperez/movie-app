@@ -1,7 +1,30 @@
 <script setup>
-import { watchEffect, defineProps } from "vue";
 import { ref, computed } from "vue";
 import { useUserStore } from "../stores/user.js";
+
+const userStore = useUserStore();
+
+const emailRules = ref([
+  (value) => {
+    if (value) return true;
+    return "email is required";
+  },
+  (value) => {
+    if (/.+@.+\..+/.test(value)) return true;
+    return "email format must be valid";
+  },
+]);
+
+const passwordRules = ref([
+  (value) => {
+    if (value) return true;
+    return "password is required";
+  },
+  (value) => {
+    if (value?.length >= 6) return true;
+    return "password must be more than 6 characters";
+  },
+]);
 
 const props = defineProps({
   open: Boolean,
@@ -9,12 +32,11 @@ const props = defineProps({
   isLogin: Boolean,
 });
 
-const userStore = useUserStore();
 const email = ref("cristo@mail.com");
 const password = ref("samyzorra");
 
 const buttonLabel = computed(() => {
-  return props.isLogin ? "Access" : "Create user";
+  return props.isLogin ? "Login" : "Create user";
 });
 
 const handleSubmit = async () => {
@@ -27,14 +49,6 @@ const handleSubmit = async () => {
     await userStore.registerUser(email.value, password.value);
   }
 };
-
-watchEffect(() => {
-  if (userStore.loadingUser.value) {
-    console.log("El usuario está cargando...");
-  } else {
-    console.log("El usuario ha iniciado sesión");
-  }
-});
 </script>
 
 <template>
@@ -51,8 +65,9 @@ watchEffect(() => {
                 <v-col>
                   <v-text-field
                     v-model.trim="email"
-                    class="log-input"
-                    label="Ingrese email"
+                    class="mb-5"
+                    :rules="emailRules"
+                    label="Enter email"
                     variant="outlined"
                     clearable
                     base-color="white"
@@ -62,9 +77,10 @@ watchEffect(() => {
                   ></v-text-field>
                   <v-text-field
                     type="password"
-                    class="log-input"
+                    class="mb-5"
+                    :rules="passwordRules"
                     v-model.trim="password"
-                    label="Ingrese contraseña"
+                    label="Enter password"
                     counter
                     variant="outlined"
                     clearable
@@ -77,6 +93,21 @@ watchEffect(() => {
               </v-row>
             </v-card-text>
             <v-spacer></v-spacer>
+            <v-card-text v-if="userStore.loginError" class="error-notification">
+              <v-icon color="#EF5350" icon="mdi-alert-outline"></v-icon>
+              <span class="ml-2 text-red-lighten-1"
+                >login error, check the data entered</span
+              >
+            </v-card-text>
+            <v-card-text
+              v-if="userStore.registerError"
+              class="error-notification"
+            >
+              <v-icon color="#EF5350" icon="mdi-alert-outline"></v-icon>
+              <span class="ml-2 text-red-lighten-1"
+                >that email already exists, enter another</span
+              >
+            </v-card-text>
             <v-card-actions>
               <v-btn
                 color="white"
@@ -107,5 +138,12 @@ watchEffect(() => {
 .v-card {
   background-color: transparent;
   backdrop-filter: blur(8px);
+}
+.error-notification {
+  padding: 10px;
+  background-color: #ffcdd2;
+  border: solid 2.5px #ef5350;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 </style>
