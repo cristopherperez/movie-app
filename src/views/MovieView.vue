@@ -110,7 +110,7 @@ const getChipColor = (rating) => {
             </p>
           </v-card-text>
           <v-card-actions class="mt-5">
-            <v-btn variant="outlined" color="white" @click="back">Volver</v-btn>
+            <v-btn variant="outlined" color="white" @click="back">Back</v-btn>
           </v-card-actions>
         </v-col>
       </v-row>

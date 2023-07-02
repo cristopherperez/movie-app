@@ -40,7 +40,7 @@ const filteredPopcorns = computed(() => {
       ></v-text-field>
       <v-select
         v-model="selectedTypes"
-        label="filtros"
+        label="filters"
         base-color="white"
         color="white"
         density="compact"
@@ -53,10 +53,10 @@ const filteredPopcorns = computed(() => {
         class="font-weight-bold text-capitalize"
         variant="flat"
         @click="search"
-        >Buscar</v-btn
+        >Search</v-btn
       >
     </div>
-    <v-card class="card-container mx-5 my-2 pa-5">
+    <v-card v-if="filteredPopcorns.length > 0" class="card-container mx-5 my-2 pa-5">
       <v-row>
         <v-col
           v-for="movie in filteredPopcorns"
