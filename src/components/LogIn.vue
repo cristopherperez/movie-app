@@ -32,8 +32,8 @@ const props = defineProps({
   isLogin: Boolean,
 });
 
-const email = ref("cristo@mail.com");
-const password = ref("samyzorra");
+const email = ref("");
+const password = ref("");
 
 const buttonLabel = computed(() => {
   return props.isLogin ? "Login" : "Create user";
