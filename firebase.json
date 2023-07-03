@@ -11,21 +11,6 @@
         "source": "**",
         "destination": "/index.html"
       }
-    ],
-    "headers": [
-      {
-        "source": "**/*.@(js|css)",
-        "headers": [
-          {
-            "key": "Content-Encoding",
-            "value": "gzip"
-          }
-        ],
-        "override": true
-      }
-    ],
-    "build": {
-      "chunkSizeWarningLimit": "1000"
-    }
+    ]
   }
 }

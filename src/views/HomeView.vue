@@ -4,16 +4,16 @@ import { RouterLink } from "vue-router";
 
 const carouselImg = ref([
   {
-    src: "src/assets/img/carousel/hbo-max-logo.webp",
+    src: "https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2020/04/hbo-max-logo-1922879.jpg?tf=1200x",
   },
   {
-    src: "src/assets/img/carousel/netflix-logo.webp",
+    src: "https://www.liderlogo.es/wp-content/uploads/2022/12/pasted-image-0-6-1024x576.png",
   },
   {
-    src: "src/assets/img/carousel/disney-logo.webp",
+    src: "https://logodownload.org/wp-content/uploads/2020/11/disney-plus-logo-0.png",
   },
   {
-    src: "src/assets/img/carousel/amazon-prime-logo.webp",
+    src: "https://logodownload.org/wp-content/uploads/2019/10/amazon-prime-logo-0.png",
   },
 ]);
 </script>
@@ -35,7 +35,7 @@ const carouselImg = ref([
     </v-carousel>
     <div class="mt-5 d-flex fill-height justify-center align-center">
       <h3 class="text-white fade-in">
-        all the content you are looking for in one place, 
+        all the content you are looking for in one place,
         <RouterLink to="/movies">
           <span class="text-purple-darken-2 fade-in-after">Popcorn NOW!</span>
         </RouterLink>
