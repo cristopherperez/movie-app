@@ -13,10 +13,12 @@ export const useUserStore = defineStore("userStore", {
     userData: null,
     loadingUser: false,
     loadingSession: false,
+    loginError: false,
+    registerError: false,
   }),
   actions: {
     async registerUser(email, password) {
-      this.loginUser = true;
+      this.loadingUser = true;
       try {
         const { user } = await createUserWithEmailAndPassword(
           auth,
@@ -25,9 +27,11 @@ export const useUserStore = defineStore("userStore", {
         );
         console.log(user);
         this.userData = { email: user.email, uid: user.uid };
+        this.registerError = false
         router.push("/");
       } catch (error) {
-        console.log(error);
+        this.registerError = true
+        console.log("Register", error);
       } finally {
         this.loadingUser = false;
       }
@@ -41,8 +45,10 @@ export const useUserStore = defineStore("userStore", {
           password
         );
         this.userData = { email: user.email, uid: user.uid };
+        this.loginError = false;
         router.push("/");
       } catch (error) {
+        this.loginError = true;
         console.log(error);
       } finally {
         this.loadingUser = false;
@@ -52,7 +58,7 @@ export const useUserStore = defineStore("userStore", {
       try {
         await signOut(auth);
         this.userData = null;
-        router.push("/login");
+        router.push("/register");
       } catch (error) {
         console.log(error);
       }
