@@ -2,35 +2,19 @@
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
 
-const colors = ref([
-  "indigo",
-  "warning",
-  "pink darken-2",
-  "red lighten-1",
-  "deep-purple accent-4",
-]);
-
 const carouselImg = ref([
   {
     src: "src/assets/img/carousel/hbo-max-logo.webp",
   },
   {
-    src: "src/assets/img/carousel/netflix-logo.png",
+    src: "src/assets/img/carousel/netflix-logo.webp",
   },
   {
-    src: "src/assets/img/carousel/disney-logo.png",
+    src: "src/assets/img/carousel/disney-logo.webp",
   },
   {
-    src: "src/assets/img/carousel/amazon-prime-logo.png",
+    src: "src/assets/img/carousel/amazon-prime-logo.webp",
   },
-]);
-
-const slides = ref([
-  "Disney +",
-  "Netflix",
-  "Paramount",
-  "HBO max",
-  "Prime Video",
 ]);
 </script>
 <template>

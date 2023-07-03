@@ -79,7 +79,7 @@ const closeSignin = () => {
 
 <style scoped>
 .bg-login {
-  background-image: url("../assets/img/bg-popcorn-now.jpg");
+  background-image: url("../assets/img/bg-popcorn-now.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

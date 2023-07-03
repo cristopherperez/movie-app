@@ -9,7 +9,7 @@ export const useDatabaseStore = defineStore("database", {
     async getUrls(searchTerm) {
       try {
         const { data } = await axios.get(
-          `http://www.omdbapi.com/?i=tt3896198&apikey=9ff345ba&s=${searchTerm}`
+          `https://www.omdbapi.com/?i=tt3896198&apikey=9ff345ba&s=${searchTerm}`
         );
         console.log(data);
         this.documents = data.Search;
@@ -22,7 +22,7 @@ export const useDatabaseStore = defineStore("database", {
       try {
         const encodedTitle = encodeURIComponent(title);
         const { data } = await axios.get(
-          `http://www.omdbapi.com/?i=tt3896198&apikey=9ff345ba&t=${encodedTitle}`
+          `https://www.omdbapi.com/?i=tt3896198&apikey=9ff345ba&t=${encodedTitle}`
         );
         console.log(data);
         return data;
